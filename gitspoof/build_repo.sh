@@ -5,6 +5,8 @@ empty_submodule="https://github.com/pielgrzym/noop"
 rm -rf evil_git_repo
 
 git init evil_git_repo --bare
+mv evil_git_repo/hooks/post-update.sample evil_git_repo/hooks/post-update
+chmod a+x evil_git_repo/hooks/post-update
 
 temp_repo=$(mktemp -d)
 git clone evil_git_repo $temp_repo
